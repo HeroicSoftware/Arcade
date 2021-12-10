@@ -9,6 +9,8 @@
 #include "SDL2/SDL.h"
 const int SCREEN_WIDTH = 224;
 const int SCREEN_HEIGHT = 288;
+void SetPixel(SDL_Surface *surface, int color, int x, int y);
+size_t GetIndex(SDL_Surface *surface, int row, int colmun);
 int main(int argc, char *argv[])
 {
     if (SDL_Init(SDL_INIT_VIDEO))
@@ -24,6 +26,12 @@ int main(int argc, char *argv[])
                   << SDL_GetError() << std::endl;
         return 1;
     }
+    // Canvas where all the drawing and updates will be made
+    SDL_Surface *windowSurface = SDL_GetWindowSurface(window);
+    int drawColor = 0xFF0000;
+    SetPixel(windowSurface, drawColor, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
+    // Update the surface after the draw
+    SDL_UpdateWindowSurface(window);
     SDL_Event event;
     bool isRunning = true;
     while (isRunning == true)
@@ -43,4 +51,17 @@ int main(int argc, char *argv[])
     SDL_DestroyWindow(window);
     SDL_Quit();
     return 0;
+}
+void SetPixel(SDL_Surface *surface, int color, int x, int y)
+{
+    // Nothing can access the surface at this moment
+    SDL_LockSurface(surface);
+    int *pixels = (int *)surface->pixels;
+    size_t pixelIndex = GetIndex(surface, y, x);
+    pixels[pixelIndex] = color;
+    SDL_UnlockSurface(surface);
+}
+size_t GetIndex(SDL_Surface *surface, int row, int colmun)
+{
+    return (row * surface->w + colmun);
 }
