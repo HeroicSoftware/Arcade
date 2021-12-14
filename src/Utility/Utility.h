@@ -2,7 +2,7 @@
  * Utility.h
  *
  *  Created on: Nov 27, 2021
- *      Author: jorda
+ *      Author: Jordan
  */
 
 #ifndef UTILITY_UTILITY_H_
