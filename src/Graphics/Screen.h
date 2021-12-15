@@ -6,12 +6,15 @@
  */
 #ifndef GRAPHICS_SCREEN_H_
 #define GRAPHICS_SCREEN_H_
-#include <stdint.h>
-#include <SDL2/SDL.h>
-#include "ScreenBuffer.h"
-#include "Color.h"
-#include "Vector2D.h"
 #include <cassert>
+#include <SDL2/SDL.h>
+#include <stdint.h>
+#include <cmath>
+#include "Color.h"
+#include "ScreenBuffer.h"
+#include "Vector2D.h"
+#include "Line2D.h"
+
 class Screen
 {
 public:
@@ -34,6 +37,7 @@ public:
     // Draw Methods
     void Draw(int x, int y, const Color &color);
     void Draw(const Vector2D &vector2D, const Color &color);
+    void Draw(const Line2D &line2D, const Color &color);
 
 private:
     // Don't allow copies of this screen

@@ -9,13 +9,15 @@
 #include "SDL2/SDL.h"
 #include "Color.h"
 #include "Screen.h"
+#include "Line2D.h"
 const int SCREEN_WIDTH = 224;
 const int SCREEN_HEIGHT = 288;
-const int WINDOW_SCALE = 2;
+const int WINDOW_SCALE = 3;
 int main(int argc, char *argv[]) {
     Screen arcadeScreen;
     arcadeScreen.Initialize(SCREEN_WIDTH, SCREEN_HEIGHT, WINDOW_SCALE);
-    arcadeScreen.Draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, Color::Pink());
+    Line2D line2D = { Vector2D(0, 0), Vector2D(SCREEN_WIDTH, SCREEN_HEIGHT) };
+    arcadeScreen.Draw(line2D, Color::Black());
     arcadeScreen.SwapScreen();
     SDL_Event event;
     bool isRunning = true;

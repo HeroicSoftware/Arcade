@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
+#ifndef UTILITY_VECTOR2D_H_
+#define UTILITY_VECTOR2D_H_
 class Vector2D {
 public:
     static const Vector2D Zero;
@@ -28,8 +30,7 @@ public:
     float GetDotProduct(const Vector2D &vector2D) const;
     float Magnitude() const;
     float MagnitudeSquared() const;
-    friend std::ostream& operator<<(std::ostream &consoleOut,
-            const Vector2D &vector2D); // toString()
+    friend std::ostream& operator<<(std::ostream &consoleOut, const Vector2D &vector2D); // toString()
     friend Vector2D operator*(float scale, const Vector2D &vector2D);
     friend Vector2D operator/(float scale, const Vector2D &vector2D);
     Vector2D& Normalize();
@@ -52,3 +53,4 @@ private:
     float x;
     float y;
 };
+#endif /* UTILITY_VECTOR2D_H_ */
