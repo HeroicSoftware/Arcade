@@ -95,3 +95,17 @@ uint8_t Color::GetBlue() const
     SDL_GetRGBA(this->color, pixelFormat, &red, &green, &blue, &alpha);
     return blue;
 }
+
+Color Color::Evaluate1MinusSourceAlpha(const Color &sourceColor, const Color &destinationColor)
+{
+
+    uint8_t alpha = sourceColor.GetAlpha();
+    float sourceAlpha = float(alpha) / 255.0f;
+    float destinationAlpha = 1.0f - sourceAlpha;
+    Color newColor;
+    newColor.SetAlpha(255);
+    newColor.SetRed(float(sourceColor.GetRed()) * sourceAlpha + destinationColor.GetRed() * destinationAlpha);
+    newColor.SetGreen(float(sourceColor.GetGreen()) * sourceAlpha + destinationColor.GetGreen() * destinationAlpha);
+    newColor.SetBlue(float(sourceColor.GetBlue()) * sourceAlpha + destinationColor.GetBlue() * destinationAlpha);
+    return newColor;
+}

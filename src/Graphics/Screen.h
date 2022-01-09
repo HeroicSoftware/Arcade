@@ -10,11 +10,16 @@
 #include <SDL2/SDL.h>
 #include <stdint.h>
 #include <cmath>
+#include <vector>
+#include <algorithm>
+#include "AxisAlignedRectangle.h"
+#include "Circle.h"
 #include "Color.h"
-#include "ScreenBuffer.h"
-#include "Vector2D.h"
 #include "Line2D.h"
-
+#include "ScreenBuffer.h"
+#include "Triangle.h"
+#include "Utility.h"
+#include "Vector2D.h"
 class Screen
 {
 public:
@@ -38,12 +43,14 @@ public:
     void Draw(int x, int y, const Color &color);
     void Draw(const Vector2D &vector2D, const Color &color);
     void Draw(const Line2D &line2D, const Color &color);
+    void Draw(const Triangle &triangle, const Color &color, bool isFilled = false, const Color &fillColor = Color::White());
+    void Draw(const AxisAlignedRectangle &rectangle, const Color &color, bool isFilled = false, const Color &fillColor = Color::White());
+    void Draw(const Circle &circle, const Color &color, bool isFilled = false, const Color &fillColor = Color::White());
 
 private:
     // Don't allow copies of this screen
     Screen(const Screen &screen);
     Screen &operator=(const Screen &screen);
-
     Color clearColor;
     ScreenBuffer backBuffer;
     uint32_t width;
@@ -51,5 +58,6 @@ private:
     SDL_Window *window;
     SDL_Surface *windowSurface;
     void ClearScreen();
+    void FillPolygon(const std::vector<Vector2D> &points, const Color &color);
 };
 #endif /* GRAPHICS_SCREEN_H_ */

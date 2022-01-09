@@ -9,58 +9,78 @@
 #include <stdint.h>
 // Forward Declaration
 struct SDL_PixelFormat;
-class Color {
+class Color
+{
 public:
     static const SDL_PixelFormat *pixelFormat;
     // This function initializes the "pen" in which we will draw the color
     static void InitializeColorFormat(const SDL_PixelFormat *pixelFormat);
 
-    static Color Black() {
+    // Blending Equation for AlphaBlending - To make pixels tranparent
+    static Color Evaluate1MinusSourceAlpha(const Color &sourceColor, const Color &destinationColor);
+
+    static Color Black()
+    {
         return Color(0, 0, 0, 255);
     }
-    static Color White() {
+    static Color White()
+    {
         return Color(255, 255, 255, 255);
     }
-    static Color NostalgiaBlue() {
+    static Color NostalgiaBlue()
+    {
         return Color(100, 149, 237, 255);
     }
-    static Color Blue() {
+    static Color Blue()
+    {
         return Color(0, 0, 255, 255);
     }
-    static Color Red() {
+    static Color Red()
+    {
         return Color(255, 0, 0, 255);
     }
-    static Color Green() {
+    static Color Green()
+    {
         return Color(0, 255, 0, 255);
     }
-    static Color Yellow() {
+    static Color Yellow()
+    {
         return Color(255, 255, 0, 255);
     }
-    static Color Magenta() {
+    static Color Magenta()
+    {
         return Color(255, 0, 255, 255);
     }
-    static Color Cyan() {
+    static Color Cyan()
+    {
         return Color(37, 240, 217, 255);
     }
-    static Color Pink() {
+    static Color Pink()
+    {
         return Color(255, 192, 203, 255);
     }
-    static Color Orange() {
-        return Color(245, 190, 100, 255);
+    static Color Orange()
+    {
+        return Color(253, 124, 49, 255);
     }
-    Color() : Color(0) {
+    Color() : Color(0)
+    {
     }
-    Color(uint32_t color) : color(color) {
+    Color(uint32_t color) : color(color)
+    {
     }
     Color(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
     virtual ~Color();
-    inline bool operator==(const Color &otherColor) const {
+    inline bool operator==(const Color &otherColor) const
+    {
         return (this->color == otherColor.color);
     }
-    inline bool operator!=(const Color &otherColor) const {
+    inline bool operator!=(const Color &otherColor) const
+    {
         return !(*this == otherColor.color);
     }
-    inline uint32_t GetPixelColor() const {
+    inline uint32_t GetPixelColor() const
+    {
         return this->color;
     }
     uint8_t GetAlpha() const;

@@ -14,8 +14,7 @@ ScreenBuffer::ScreenBuffer() : surface(nullptr)
 ScreenBuffer::ScreenBuffer(const ScreenBuffer &screenBuffer)
 {
     // Create a surface
-    this->surface = SDL_CreateRGBSurfaceWithFormat(0, screenBuffer.surface->w, screenBuffer.surface->h, 0,
-                                                   screenBuffer.surface->format->format);
+    this->surface = SDL_CreateRGBSurfaceWithFormat(0, screenBuffer.surface->w, screenBuffer.surface->h, 0, screenBuffer.surface->format->format);
     // Copy all the pixel from screenBuffer.surface to surfaces
     SDL_BlitSurface(screenBuffer.surface, nullptr, surface, nullptr);
 }
@@ -26,7 +25,7 @@ ScreenBuffer::~ScreenBuffer()
         SDL_FreeSurface(this->surface);
     }
 }
-ScreenBuffer &ScreenBuffer::operator=(const ScreenBuffer &screenBuffer)
+ScreenBuffer& ScreenBuffer::operator=(const ScreenBuffer &screenBuffer)
 {
     if (this == &screenBuffer)
     {
@@ -42,8 +41,7 @@ ScreenBuffer &ScreenBuffer::operator=(const ScreenBuffer &screenBuffer)
     if (screenBuffer.surface != nullptr)
     {
         // Create a surface
-        this->surface = SDL_CreateRGBSurfaceWithFormat(0, screenBuffer.surface->w, screenBuffer.surface->h, 0,
-                                                       screenBuffer.surface->format->format);
+        this->surface = SDL_CreateRGBSurfaceWithFormat(0, screenBuffer.surface->w, screenBuffer.surface->h, 0, screenBuffer.surface->format->format);
         // Copy all the pixel from screenBuffer.surface to surfaces
         SDL_BlitSurface(screenBuffer.surface, nullptr, surface, nullptr);
     }
@@ -85,9 +83,10 @@ void ScreenBuffer::SetPixel(const Color &color, int x, int y)
     {
         // Nothing can access the surface at this moment
         SDL_LockSurface(this->surface);
-        uint32_t *pixels = (uint32_t *)this->surface->pixels;
+        uint32_t *pixels = (uint32_t*) this->surface->pixels;
         size_t pixelIndex = GetIndex(y, x);
-        pixels[pixelIndex] = color.GetPixelColor();
+        Color surfaceColor = Color(pixels[pixelIndex]); // destinationColor
+        pixels[pixelIndex] = Color::Evaluate1MinusSourceAlpha(color, surfaceColor).GetPixelColor();
         SDL_UnlockSurface(this->surface);
     }
 }
