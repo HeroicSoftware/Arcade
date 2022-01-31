@@ -4,6 +4,7 @@
  *  Created on: Dec 11, 2021
  *      Author: Jordan Hunt
  */
+
 #ifndef GRAPHICS_COLOR_H_
 #define GRAPHICS_COLOR_H_
 #include <stdint.h>

@@ -4,13 +4,14 @@
  *  Created on: Dec 17, 2021
  *      Author: Jordan Hunt
  */
+
 #ifndef SHAPES_TRIANGLE_H_
 #define SHAPES_TRIANGLE_H_
 #include "Shape.h"
 #include <cmath>
 #include "Utility.h"
 
-class Triangle: public Shape
+class Triangle : public Shape
 {
 public:
     Triangle();

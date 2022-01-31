@@ -24,12 +24,12 @@ SDL_Window *Screen::Initialize(uint32_t width, uint32_t height, uint32_t windowS
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO))
     {
-        std::cout << "[ERROR] - SDL_Init Failed" << std::endl;
+        std::cout << "[Screen.cpp] - [ERROR] - SDL_Init Failed" << std::endl;
     }
     this->width = width;
     this->height = height;
     // Create the window
-    window = SDL_CreateWindow("ArcadeWindow", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->width * windowScale, this->height * windowScale, 0);
+    window = SDL_CreateWindow("Gallant Electronic Systems Interactive Entertainment Cabinet", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->width * windowScale, this->height * windowScale, 0);
     // If there is no error creating the window get the surface from that window
     if (window)
     {
@@ -45,7 +45,7 @@ SDL_Window *Screen::Initialize(uint32_t width, uint32_t height, uint32_t windowS
     // If there is an error creating the windows
     else
     {
-        std::cout << "[ERROR] - Could not create window, SDL Error: " << SDL_GetError() << std::endl;
+        std::cout << "[Screen.cpp] - [ERROR] - Could not create window, SDL Error: " << SDL_GetError() << std::endl;
         return nullptr;
     }
     return window;
@@ -66,7 +66,7 @@ void Screen::SwapScreen()
     }
     else
     {
-        std::cout << "[ERROR] - Unable to SwapScreen() window not initialized" << std::endl;
+        std::cout << "[Screen.cpp] - [ERROR] - Unable to SwapScreen() window not initialized" << std::endl;
     }
 }
 void Screen::Draw(int x, int y, const Color &color)
@@ -79,7 +79,7 @@ void Screen::Draw(int x, int y, const Color &color)
     }
     else
     {
-        std::cout << "[ERROR] - Unable to Draw()  window not initialized" << std::endl;
+        std::cout << "[Screen.cpp] - [ERROR] - Unable to Draw()  window not initialized" << std::endl;
     }
 }
 void Screen::Draw(const Vector2D &vector2D, const Color &color)
@@ -93,7 +93,7 @@ void Screen::Draw(const Vector2D &vector2D, const Color &color)
     }
     else
     {
-        std::cout << "[ERROR] - Unable to Draw()  window not initialized" << std::endl;
+        std::cout << "[Screen.cpp] - [ERROR] - Unable to Draw()  window not initialized" << std::endl;
     }
 }
 void Screen::Draw(const AxisAlignedRectangle &rectangle, const Color &color, bool isFilled, const Color &fillColor)
@@ -121,7 +121,7 @@ void Screen::ClearScreen()
     }
     else
     {
-        std::cout << "[ERROR] - Unable to ClearScreen() window not initialized" << std::endl;
+        std::cout << "[Screen.cpp] - [ERROR] - Unable to ClearScreen() window not initialized" << std::endl;
     }
 }
 void Screen::Draw(const Line2D &line2D, const Color &color)
@@ -180,7 +180,7 @@ void Screen::Draw(const Line2D &line2D, const Color &color)
     }
     else
     {
-        std::cout << "[ERROR] - Unable to Draw() window not initialized" << std::endl;
+        std::cout << "[Screen.cpp] - [ERROR] - Unable to Draw() window not initialized" << std::endl;
     }
 }
 void Screen::Draw(const Triangle &triangle, const Color &color, bool isFilled, const Color &fillColor)

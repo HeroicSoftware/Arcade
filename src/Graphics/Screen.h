@@ -4,6 +4,7 @@
  *  Created on: Dec 13, 2021
  *      Author: Jordan
  */
+
 #ifndef GRAPHICS_SCREEN_H_
 #define GRAPHICS_SCREEN_H_
 #include <cassert>
