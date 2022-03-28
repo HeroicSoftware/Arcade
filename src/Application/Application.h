@@ -26,8 +26,8 @@ public:
     bool Initialize(uint32_t width, uint32_t height, uint32_t magnification);
     void Run();
     inline uint32_t GetWidth() const
-    {
-        return this->applicationScreen.GetWidth();
+    { 
+        return applicationScreen.GetWidth();
     }
     inline uint32_t GetHeight() const
     {
@@ -36,8 +36,10 @@ public:
     void PushScene(std::unique_ptr<Scene> scene);
     void PopScene();
     Scene *PeekScene();
+    static const std::string &GetBasePath();
 
 private:
+
     Screen applicationScreen;
     InputController applicationInputController;
     SDL_Window *applicationWindow;

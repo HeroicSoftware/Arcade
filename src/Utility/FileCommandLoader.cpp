@@ -98,10 +98,10 @@ Color FileCommandLoader::ReadColor(const ParseFunctionParameters &parameters)
     size_t lastSpacePosition = nextSpacePosition;
     nextSpacePosition = parameters.line.find_first_of(" ", lastSpacePosition + 1);
     int green = std::stoi(parameters.line.substr(lastSpacePosition + 1, nextSpacePosition - lastSpacePosition));
+    lastSpacePosition = nextSpacePosition;
     nextSpacePosition = parameters.line.find_first_of(" ", lastSpacePosition + 1);
     int blue = std::stoi(parameters.line.substr(lastSpacePosition + 1, nextSpacePosition - lastSpacePosition));
-    nextSpacePosition = parameters.line.find_first_of(" ", lastSpacePosition + 1);
-    int alpha = std::stoi(parameters.line.substr(lastSpacePosition + 1, nextSpacePosition - lastSpacePosition));
+    int alpha = std::stoi(parameters.line.substr(nextSpacePosition + 1));
     return Color(red, green, blue, alpha);
 }
 Vector2D FileCommandLoader::ReadSize(const ParseFunctionParameters &parameters)

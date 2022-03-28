@@ -6,6 +6,8 @@
  */
 #include "Application.h"
 #include "ArcadeScene.h"
+#include "Breakout/Breakout.h"
+#include "GameScene.h"
 // Create one instance of the application using Singleton Design Pattern. Only use the singleton throughout the program.
 Application &Application::Singleton()
 {
@@ -18,26 +20,19 @@ bool Application::Initialize(uint32_t width, uint32_t height, uint32_t magnifica
     // Arcade Scene
     std::unique_ptr<ArcadeScene> arcadeScene = std::make_unique<ArcadeScene>();
     PushScene(std::move(arcadeScene));
+    // Temporary - Testing only
+    {
+        std::unique_ptr<Breakout> breakOutGame = std::make_unique<Breakout>();
+        // Game Scene of Breakout
+        std::unique_ptr<GameScene> breakoutScene = std::make_unique<GameScene>(std::move(breakOutGame));
+        PushScene(std::move(breakoutScene));
+    }
     return (applicationWindow != nullptr);
 }
 void Application::Run()
 {
     if (this->applicationWindow)
     {
-        Line2D line2D =
-            {Vector2D(0, 0), Vector2D(applicationScreen.GetWidth(), applicationScreen.GetHeight())};
-        Line2D line2D2 =
-            {Vector2D(applicationScreen.GetWidth(), 0), Vector2D(0, applicationScreen.GetHeight())};
-        Triangle testTriangle =
-            {Vector2D(60, 10), Vector2D(10, 110), Vector2D(110, 110)};
-        AxisAlignedRectangle testRectangle =
-            {Vector2D(applicationScreen.GetWidth() / 2 - 25, applicationScreen.GetHeight() / 2 - 25), 50, 50};
-        Circle testCircle =
-            {Vector2D(applicationScreen.GetWidth() / 2 + 50, applicationScreen.GetHeight() / 2 + 50), 50};
-        testTriangle.MoveTo(Vector2D((applicationScreen.GetWidth() / 2), (applicationScreen.GetHeight() / 2)));
-        // Draw two lines that will cross as the center of the screen.
-        applicationScreen.Draw(line2D, Color::Red());
-        applicationScreen.Draw(line2D2, Color::Red());
         // Draw the triangle at the new destination
         bool isRunning = true;
         // Get Current Time - milliseconds
@@ -47,9 +42,9 @@ void Application::Run()
         uint32_t deltaTime = 10;
         uint32_t accumulatorTime = 0;
         // Start the input controller
-        applicationInputController.Initialize([&isRunning](uint32_t deltaTime, InputState state)
-                                              { isRunning = false; });
-
+        applicationInputController.Initialize(
+            [&isRunning](uint32_t deltaTime, InputState state)
+            { isRunning = false; });
         while (isRunning == true)
         {
             // Time
@@ -127,4 +122,10 @@ Scene *Application::PeekScene()
         // Return the last scene in the stack which is the top
         return sceneStack.back().get();
     }
+}
+
+const std::string &Application::GetBasePath()
+{
+    static std::string basePath = SDL_GetBasePath();
+    return basePath;
 }

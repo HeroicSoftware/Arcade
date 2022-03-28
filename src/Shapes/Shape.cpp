@@ -7,13 +7,16 @@
 
 #include <Shape.h>
 
-Shape::~Shape() {
+Shape::~Shape()
+{
     // TODO Auto-generated destructor stub
 }
 
-void Shape::MoveByDeltaOffset(const Vector2D &deltaOffset) {
+void Shape::MoveByDeltaOffset(const Vector2D &deltaOffset)
+{
     // For-each
-    for (Vector2D &point : points) {
+    for (Vector2D &point : points)
+    {
         point = point + deltaOffset;
     }
 }

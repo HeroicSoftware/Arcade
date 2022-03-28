@@ -30,6 +30,5 @@ void GameScene::Render(Screen &screen)
 }
 const std::string &GameScene::GetSceneName() const
 {
-    static std::string sceneName = "";
-    return sceneName;
+    return game->GetName();
 }

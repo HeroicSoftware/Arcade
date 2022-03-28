@@ -39,9 +39,9 @@ float AxisAlignedRectangle::GetHeight() const
 bool AxisAlignedRectangle::Intersects(const AxisAlignedRectangle &otherRectangle) const
 {
     bool intersectionLeft = otherRectangle.GetEndPoint().GetX() < GetOriginPoint().GetX();
-    bool intersectionTop = otherRectangle.GetOriginPoint().GetY() > GetEndPoint().GetY();
+    bool intersectionTop = otherRectangle.GetOriginPoint().GetX() > GetEndPoint().GetX();
     bool intersectionRight = otherRectangle.GetEndPoint().GetY() < GetOriginPoint().GetY();
-    bool interSectionBottom = otherRectangle.GetEndPoint().GetY() > GetEndPoint().GetY();
+    bool interSectionBottom = otherRectangle.GetOriginPoint().GetY() > GetEndPoint().GetY();
 
     // Any of these conditions are true then there would be a intersection
     return !(intersectionLeft || intersectionTop || intersectionRight || interSectionBottom);
@@ -56,8 +56,7 @@ bool AxisAlignedRectangle::ContainsPoint(const Vector2D &point) const
 
 AxisAlignedRectangle AxisAlignedRectangle::Inset(const AxisAlignedRectangle &rectangle, Vector2D &insets)
 {
-    AxisAlignedRectangle newRectangle = AxisAlignedRectangle((rectangle.GetOriginPoint() + insets), (rectangle.GetWidth() - 2 * insets.GetX()), (rectangle.GetHeight() - 2 * insets.GetY()));
-    return newRectangle;
+    return AxisAlignedRectangle((rectangle.GetOriginPoint() + insets), (rectangle.GetWidth() - 2 * insets.GetX()), (rectangle.GetHeight() - 2 * insets.GetY()));
 }
 
 Vector2D AxisAlignedRectangle::GetCenterPoint() const

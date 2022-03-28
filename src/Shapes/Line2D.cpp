@@ -40,7 +40,7 @@ Vector2D Line2D::ClosestPoint(const Vector2D &point, bool limitToSegment) const
     float t = dotProduct / length;
     if (limitToSegment)
     {
-        t = std::fmax(0.0f, std::fmin(1.0f, t));
+        t = std::fmax(0, std::fmin(1.0f, t));
     }
     return (point0 + point0ToPoint1 * t);
 }

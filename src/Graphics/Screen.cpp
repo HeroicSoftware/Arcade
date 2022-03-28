@@ -19,7 +19,7 @@ Screen::~Screen()
     }
     SDL_Quit();
 }
-SDL_Window *Screen::Initialize(uint32_t width, uint32_t height, uint32_t windowScale)
+SDL_Window* Screen::Initialize(uint32_t width, uint32_t height, uint32_t windowScale)
 {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO))
@@ -29,7 +29,8 @@ SDL_Window *Screen::Initialize(uint32_t width, uint32_t height, uint32_t windowS
     this->width = width;
     this->height = height;
     // Create the window
-    window = SDL_CreateWindow("Gallant Electronic Systems Interactive Entertainment Cabinet", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->width * windowScale, this->height * windowScale, 0);
+    window = SDL_CreateWindow("Gallant Electronic Systems Interactive Entertainment Cabinet", SDL_WINDOWPOS_CENTERED,
+    SDL_WINDOWPOS_CENTERED, this->width * windowScale, this->height * windowScale, 0);
     // If there is no error creating the window get the surface from that window
     if (window)
     {
@@ -266,7 +267,7 @@ void Screen::FillPolygon(const std::vector<Vector2D> &points, const Color &color
             {
                 float pointIY = points[i].GetY();
                 float pointJY = points[j].GetY();
-                if ((pointIY <= (float)pixelY && pointJY > (float)pixelY) || (pointJY <= (float)pixelY && pointIY > (float)pixelY))
+                if ((pointIY <= (float) pixelY && pointJY > (float) pixelY) || (pointJY <= (float) pixelY && pointIY > (float) pixelY))
                 {
                     float denominator = pointJY - pointIY;
                     if (IsEqual(denominator, 0))
